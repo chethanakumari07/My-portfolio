@@ -6,6 +6,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+:root
+[data-theme="dark"],
+[data-theme="dark"] {
+  --bg: #1a1a2e;
+  --card: #2c2c54;
+  --card-alt: #22223f;
+  --text: #ffffff;
+  --text-secondary: #cfcfe0;
+  --text-muted: #9a9ac0;
+  --accent: #f4c542;
+}
+
+[data-theme="light"] {
+  --bg: #f7f7fb;
+  --card: #eaeaf5;
+  --card-alt: #ffffff;
+  --text: #1a1a2e;
+  --text-secondary: #3f3f5c;
+  --text-muted: #6b6b8a;
+  --accent: #d9a520;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
