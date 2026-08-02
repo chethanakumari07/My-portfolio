@@ -21,16 +21,12 @@ function Navbar({ theme, toggleTheme}) {
         <li><a href="#portfolio" onClick={(e) => { e.preventDefault(); scrollTo("portfolio"); }}>Portfolio</a></li>
         <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}>Contact</a></li>
       </ul>
-      <div className="navbar-actions">
         <button
           className="theme-toggle"
           onClick={toggleTheme}
-          aria-label="Toggle theme"
-          title="Toggle light/dark theme"
-        >
-          {theme === "dark" ? "☀️" : "🌙"}
+          aria-label="Toggle theme">
+         <i className={theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon"} ></i>
         </button>
-      </div>
          </nav>
   );
 }
@@ -246,11 +242,11 @@ function App() {
   const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    document.body.className = theme== "dark" ? "dark-theme" : "light-theme";
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+    setTheme((t) => (t === "dark" ? "light" : "dark"));
   };
 
   return (
