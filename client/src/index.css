@@ -65,7 +65,7 @@ body {
   color: #f4c542;
 }
 
-.contact-btn {
+.hire-btn {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -114,28 +114,46 @@ body {
   color: #cfcfe0;
   max-width: 480px;
 }
-
-.hire-btn {
+.hero-socials {
+  display: flex;
+  gap: 18px;
   margin-top: 32px;
+}
+
+.social-pill {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: #ffffff;
-  color: #1a1a2e;
-  border: none;
-  padding: 16px 32px;
-  border-radius: 30px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, #68477e 0%, #0d0d4d 60%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e6b208;
+  font-size: 20px;
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.social-pill:hover {
+  color: #f4c542;
+  background: rgba(244, 197, 66, 0.12);
+  transform: translateY(-2px);
+}
+
+.hero-socials-wrapper a i {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-image-wrapper {
-  width: 380px;
-  height: 460px;
-  border-radius: 24px;
+  width: 280px;
+  height: 260px;
+  border-radius: 400px;
   overflow: hidden;
-  background: linear-gradient(160deg, #f4c542 0%, #2c2c54 60%);
+  background: linear-gradient(160deg, #f0d99a 0%, #0d0d4d 60%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -190,6 +208,7 @@ section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin-top: 32px;
 }
@@ -197,9 +216,9 @@ section {
 .skill-pill {
   background: #2c2c54;
   color: #ffffff;
-  padding: 8px 18px;
+  padding: 10px 18px;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 23px;
   font-weight: 500;
 }
 

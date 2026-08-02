@@ -21,8 +21,8 @@ function Navbar() {
         <li><a href="#portfolio" onClick={(e) => { e.preventDefault(); scrollTo("portfolio"); }}>Portfolio</a></li>
         <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}>Contact</a></li>
       </ul>
-      <button className="contact-btn" onClick={() => scrollTo("contact")}>
-        <span>💬</span> Contact me
+      <button className="hire-btn" onClick={() => scrollTo("contact")}>
+        <span>�</span> Hire me
       </button>
     </nav>
   );
@@ -32,22 +32,39 @@ function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero-text">
+       <div className="hero-socials">
+         <a
+          className="social-pill s1"
+          href="https://www.linkedin.com/in/chethana-kumari-c-847002362?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+          aria-label="LinkedIn"
+          target="_blank"
+          rel="noreferrer"
+         >
+          <i className="fa-brands fa-linkedin"></i>
+         </a>
+         <a
+          className="social-pill s2"
+          href="https://github.com/chethanakumari07"
+          aria-label="GitHub"
+          target="_blank"
+          rel="noreferrer"
+         >
+          <i className="fa-brands fa-github"></i>
+         </a>
+       </div>
         <p className="greeting">Hello,</p>
         <h1>
-          I'm <span className="highlight">Chethana</span>
+          I'm <span className="highlight">Chethana kumari C</span>
           <br />
-          Software Developer
+          <h6>Software Developer</h6>
         </h1>
         <p>
-          I'm a final-year Information Science & Engineering student who
-          builds full-stack web applications end to end — from clean,
-          responsive interfaces to the backend logic that powers them.
+          I'm a final-year Information Science & Engineering student who builds a
+          full-stack web applications end to end - from clean,responsive interfaces 
+          to the backend logic that powers them.
         </p>
-        <button className="hire-btn" onClick={() => scrollTo("contact")}>
-          <span>💼</span> Hire me
-        </button>
       </div>
-
+      
       <div className="hero-image-wrapper">
         {/* Replace the src below with your own photo, e.g. /profile.jpg placed in the public folder */}
         <img
