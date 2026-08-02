@@ -9,6 +9,12 @@ function scrollTo(id) {
 }
 
 function Navbar({ theme, toggleTheme}) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const handleLinkClick = (id) => {
+    scrollTo(id);
+    setMenuOpen(false);
+  };
+
   return (
     <nav className="navbar">
       <div className="logo">
@@ -27,7 +33,17 @@ function Navbar({ theme, toggleTheme}) {
           aria-label="Toggle theme">
          <i className={theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon"} ></i>
         </button>
-         </nav>
+        <button
+          className={`hamburger ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label="Toggle menu"
+        >
+          <i className="fa-solid fa-bars"></i>
+         <span></span>
+         <span></span>
+         <span></span>
+         </button>
+      </nav>
   );
 }
 function Hero() {
@@ -242,7 +258,7 @@ function App() {
   const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
-    document.body.className = theme== "dark" ? "dark-theme" : "light-theme";
+    document.body.className = theme=== "dark" ? "dark-theme" : "light-theme";
   }, [theme]);
 
   const toggleTheme = () => {

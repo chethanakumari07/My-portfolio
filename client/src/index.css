@@ -207,7 +207,7 @@ body {
 /* Shared section styles */
 section {
   padding: 80px;
-  scroll-snap-margin-top:40px;
+  scroll-margin-top: 40px;
 }
 
 .section-title {
