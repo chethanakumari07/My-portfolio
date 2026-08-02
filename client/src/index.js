@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import { createRoot } from "react-dom/client";
 import emailjs from "@emailjs/browser";
 import "./index.css";
@@ -8,7 +8,7 @@ function scrollTo(id) {
   if (el) el.scrollIntoView({ behavior: "smooth" });
 }
 
-function Navbar() {
+function Navbar({ theme, toggleTheme}) {
   return (
     <nav className="navbar">
       <div className="logo">
@@ -21,33 +21,50 @@ function Navbar() {
         <li><a href="#portfolio" onClick={(e) => { e.preventDefault(); scrollTo("portfolio"); }}>Portfolio</a></li>
         <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}>Contact</a></li>
       </ul>
-      <button className="contact-btn" onClick={() => scrollTo("contact")}>
-        <span>💬</span> Contact me
-      </button>
-    </nav>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label="Toggle theme">
+         <i className={theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon"} ></i>
+        </button>
+         </nav>
   );
 }
-
 function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero-text">
+        <div className="hero-socials">
+          <a
+            className="social-pill s1"
+            href="https://www.linkedin.com/in/chethana-kumari-c-847002362?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+            aria-label="LinkedIn"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fa-brands fa-linkedin"></i>
+          </a>
+          <a
+            className="social-pill s2"
+            href="https://github.com/chethanakumari07"
+            aria-label="GitHub"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fa-brands fa-github"></i>
+          </a>
+        </div>
         <p className="greeting">Hello,</p>
         <h1>
-          I'm <span className="highlight">Chethana</span>
-          <br />
-          Software Developer
+          I'm 
+          <h1 className="highlight">Chethana kumari C</h1>
+          <h6>Software Developer</h6>
         </h1>
-        <p>
-          I'm a final-year Information Science & Engineering student who
-          builds full-stack web applications end to end — from clean,
-          responsive interfaces to the backend logic that powers them.
-        </p>
         <button className="hire-btn" onClick={() => scrollTo("contact")}>
-          <span>💼</span> Hire me
-        </button>
+        <span>�</span> Hire me
+      </button>   
       </div>
-
+          
       <div className="hero-image-wrapper">
         {/* Replace the src below with your own photo, e.g. /profile.jpg placed in the public folder */}
         <img
@@ -67,11 +84,6 @@ function Hero() {
 }
 
 function About() {
-  // const skills = [
-  //   "Java", "Python", "C", "PHP", "React", "Node.js",
-  //   "Flask", "MySQL", "HTML/CSS/JS", "DSA"
-  // ];
-
   return (
     <section className="about" id="about">
       <h2 className="section-title">About <span className="highlight">Me</span></h2>
@@ -154,11 +166,13 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
-    const serviceId = "service_t3e2caj"; 
-    const templateId = "wqUC-fdW398zz7GD6"; 
+    const serviceId = "service_t3e2caj";
+    const templateId = "wqUC-fdW398zz7GD6";
     const public_key = "wqUC-fdW398zz7GD6";
     try {
-      await emailjs.send(serviceId, templateId, 
+      await emailjs.send(
+        serviceId,
+        templateId,
         {
           from_name: form.name,
           from_email: form.email,
@@ -225,9 +239,19 @@ function Footer() {
 }
 
 function App() {
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    document.body.className = theme== "dark" ? "dark-theme" : "light-theme";
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((t) => (t === "dark" ? "light" : "dark"));
+  };
+
   return (
     <div>
-      <Navbar />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
       <Hero />
       <About />
       <Skills />
