@@ -1,12 +1,26 @@
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import emailjs from "@emailjs/browser";
+import profileAvatar from "./profile_avatar-removebg-preview.png";
+import chethanacv from "./chethana cv (1).pdf";
 import "./index.css";
+
+const serviceId = "service_t3e2caj";
+const templateId = "template_bof8h2h";
+const publicKey = "wqUC-fdW398zz7GD6";
+
+// Replace the placeholder values above with the real EmailJS credentials
+// from your EmailJS dashboard for the contact form to work.
 
 function scrollTo(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: "smooth" });
 }
+
+function Navbar({ theme, toggleTheme}) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => setMenuOpen(false);
 
 function Navbar() {
   return (
@@ -14,13 +28,28 @@ function Navbar() {
       <div className="logo">
         CKC<span>.</span>
       </div>
-      <ul className="nav-links">
-        <li><a href="#home" onClick={(e) => { e.preventDefault(); scrollTo("home"); }} className="active">Home</a></li>
-        <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollTo("about"); }}>About</a></li>
-        <li><a href="#Skills" onClick={(e) => { e.preventDefault(); scrollTo("Skills"); }}>Skills</a></li>
-        <li><a href="#portfolio" onClick={(e) => { e.preventDefault(); scrollTo("portfolio"); }}>Portfolio</a></li>
-        <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}>Contact</a></li>
+
+      <ul className={`nav-links ${menuOpen ? "show" : ""}`}>
+        <li><a href="#home" onClick={(e) => { e.preventDefault(); scrollTo("home"); closeMenu(); }} className="active">Home</a></li>
+        <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollTo("about"); closeMenu(); }}>About</a></li>
+        <li><a href="#Skills" onClick={(e) => { e.preventDefault(); scrollTo("Skills"); closeMenu(); }}>Skills</a></li>
+        <li><a href="#portfolio" onClick={(e) => { e.preventDefault(); scrollTo("portfolio"); closeMenu(); }}>Portfolio</a></li>
+        <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); closeMenu(); }}>Contact</a></li>
       </ul>
+
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        aria-label="Toggle theme">
+        <i className={theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon"}></i>
+      </button>
+
+      <button
+        className="mobile-toggle"
+        aria-label="Toggle navigation menu"
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen((open) => !open)}>
+        <i className="fa-solid fa-bars"></i>
       <button className="contact-btn" onClick={() => scrollTo("contact")}>
         <span>💬</span> Contact me
       </button>
@@ -49,9 +78,8 @@ function Hero() {
       </div>
 
       <div className="hero-image-wrapper">
-        {/* Replace the src below with your own photo, e.g. /profile.jpg placed in the public folder */}
         <img
-          src="/profile.jpg"
+          src={profileAvatar}
           alt="Chethana"
           onError={(e) => {
             e.target.style.display = "none";
@@ -59,7 +87,7 @@ function Hero() {
           }}
         />
         <div className="hero-image-placeholder" style={{ display: "none" }}>
-          Add your photo at public/profile.jpg
+          <img src={profileAvatar} alt="Chethana" />
         </div>
       </div>
     </section>
@@ -82,14 +110,33 @@ function About() {
           from responsive frontends to the databases and APIs behind them —
           and I care about clean, usable design as much as working code.
         </p>
+        <div>          
+          <h3><span className="know me"> GET TO KNOW ME </span></h3>
+          <button
+            className="view-cv"
+            onClick={() => window.open(chethanacv, "_blank")}
+          >
+            <span></span> View CV
+          </button>
+        </div>
+        <div className="about-stats">
+        <div className="stat-box"><div className="stat-num">3+</div><div className="stat-label">Years Learning</div></div>
+        <div className="stat-box"><div className="stat-num">9</div><div className="stat-label">CGPA at BGSIT</div></div>
+        <div className="stat-box"><div className="stat-num">3</div><div className="stat-label">Projects Shipped</div></div>
+       </div>
       </div>
     </section>
   );
 }
 function Skills() {
   const skills = [
-    "Java", "Python", "C", "PHP", "React", "Node.js",
-    "Flask", "MySQL", "HTML/CSS/JS", "DSA"
+    "Python",
+    "JavaScript",
+    "React.js",
+    "MySQL",
+    "Git & GitHub",
+    "DSA",
+    "Node.js",
   ];
 
   return (
@@ -97,7 +144,9 @@ function Skills() {
       <h2 className="section-title">My <span className="highlight">Skills</span></h2>
       <div className="skills-grid">
         {skills.map((skill) => (
-          <span className="skill-pill" key={skill}>{skill}</span>
+          <div className="skill-card" key={skill}>
+            <div className="skill-name">{skill}</div>
+          </div>
         ))}
       </div>
     </section>
@@ -144,8 +193,9 @@ function Portfolio() {
 }
 
 function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ first_name: "", last_name: "", email: "", message: "", phone: "" });
   const [status, setStatus] = useState(null); // null | "sending" | "sent" | "error"
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -154,23 +204,36 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
+    setErrorMessage("");
+
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus("error");
+      setErrorMessage("EmailJS credentials are missing. Add your real service ID, template ID, and public key from the EmailJS dashboard.");
+      return;
+    }
+
     const serviceId = "service_t3e2caj"; 
     const templateId = "wqUC-fdW398zz7GD6"; 
     const public_key = "wqUC-fdW398zz7GD6";
     try {
       await emailjs.send(serviceId, templateId, 
         {
-          from_name: form.name,
-          from_email: form.email,
+          first_name: form.first_name,
+          last_name: form.last_name,
+          reply_to: form.email,
+          phone: form.phone || "Not provided",
+          time: new Date().toLocaleString(),
           message: form.message,
-        }, 
-        public_key
+        },
+        publicKey
       );
+
       setStatus("sent");
-      setForm({ name: "", email: "", message: "" });
+      setForm({ first_name: "", last_name: "", email: "", message: "", phone: "" });
     } catch (error) {
       console.error("Error sending email:", error);
       setStatus("error");
+      setErrorMessage("Something went wrong. Check your EmailJS service ID, template ID, and public key.");
     }
   };
 
@@ -184,23 +247,38 @@ function Contact() {
       <form className="contact-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          name="name"
-          placeholder="Your name"
-          value={form.name}
+          name="first_name"
+          placeholder="First name"
+          value={form.first_name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="last_name"
+          placeholder="Last name"
+          value={form.last_name}
           onChange={handleChange}
           required
         />
         <input
           type="email"
           name="email"
-          placeholder="Your email"
+          placeholder="Email"
           value={form.email}
           onChange={handleChange}
           required
         />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone"
+          value={form.phone}
+          onChange={handleChange}
+        />
         <textarea
           name="message"
-          placeholder="Your message"
+          placeholder="Message"
           rows="4"
           value={form.message}
           onChange={handleChange}
@@ -210,7 +288,7 @@ function Contact() {
           {status === "sending" ? "Sending..." : "✉️ Send message"}
         </button>
         {status === "sent" && <p className="form-status success">Message sent — thank you!</p>}
-        {status === "error" && <p className="form-status error">Something went wrong. Try again.</p>}
+        {status === "error" && <p className="form-status error">{errorMessage || "Something went wrong. Try again."}</p>}
       </form>
     </section>
   );
@@ -225,6 +303,16 @@ function Footer() {
 }
 
 function App() {
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    document.body.className = theme=== "dark" ? "dark-theme" : "light-theme";
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((t) => (t === "dark" ? "light" : "dark"));
+  };
+
   return (
     <div>
       <Navbar />
