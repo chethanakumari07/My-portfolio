@@ -47,6 +47,7 @@ function Navbar({ theme, toggleTheme}) {
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen((open) => !open)}>
         <i className="fa-solid fa-bars"></i>
+          </button>
     </nav>
   );
 }
