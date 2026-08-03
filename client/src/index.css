@@ -35,6 +35,7 @@ body.light-theme {
   cursor:pointer;
   color:var(--text-dim);
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -63,10 +64,7 @@ body {
 .logo {
   font-size: 26px;
   font-weight: 800;
-  background: content-box radial-gradient(rgb(240, 197, 9), rgb(2, 1, 59));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #f4c542;
 }
 
 .logo span {
@@ -98,17 +96,16 @@ body {
   color: #f4c542;
 }
 
-.hire-btn {
-  margin-top: 32px;
-  display: inline-flex;
+.contact-btn {
+  display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: #ffffff;
   color: #1a1a2e;
   border: none;
-  padding: 16px 32px;
+  padding: 12px 22px;
   border-radius: 30px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
 }
@@ -117,7 +114,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 70px 100px;
+  padding: 60px 80px 40px;
   min-height: 640px;
 }
 
@@ -148,56 +145,38 @@ body {
   color: #cfcfe0;
   max-width: 480px;
 }
-.hero-socials {
-  display:flex;
-  gap: 18px;
+
+.hire-btn {
   margin-top: 32px;
-}
-
-.social-pill {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: linear-gradient(160deg, #68477e 0%, #0d0d4d 60%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #e6b208;
-  font-size: 20px;
-  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
-}
-
-.social-pill:hover {
-  color: #f4c542;
-  background: rgba(244, 197, 66, 0.12);
-  transform: translateY(-2px);
-}
-
-.hero-socials-wrapper a i {
-  width: 20px;
-  height: 20px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #1a1a2e;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .hero-image-wrapper {
-  width: 280px;
-  height: 260px;
-  border-radius: 400px;
+  width: 380px;
+  height: 460px;
+  border-radius: 24px;
   overflow: hidden;
-  background: linear-gradient(160deg, #f0d99a 0%, #0d0d4d 60%);
-  display: flex;
+  background: linear-gradient(160deg, #f4c542 0%, #2c2c54 60%);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: center;
+  position: relative;
 }
 
 .hero-image-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit:centre;
+  object-fit: cover;
 }
 
 .hero-image-placeholder {
@@ -245,6 +224,9 @@ section {
   margin-bottom: 16px;
   color: #f4c542;
   line-height: 50px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
 }
 .about-content p {
   font-size: 15px;

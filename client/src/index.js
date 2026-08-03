@@ -1,4 +1,4 @@
-import { useState,useEffect} from "react";
+import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import emailjs from "@emailjs/browser";
 import profileAvatar from "./profile_avatar-removebg-preview.png";
@@ -22,6 +22,7 @@ function Navbar({ theme, toggleTheme}) {
 
   const closeMenu = () => setMenuOpen(false);
 
+function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo">
@@ -49,6 +50,8 @@ function Navbar({ theme, toggleTheme}) {
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen((open) => !open)}>
         <i className="fa-solid fa-bars"></i>
+      <button className="contact-btn" onClick={() => scrollTo("contact")}>
+        <span>💬</span> Contact me
       </button>
     </nav>
   );
@@ -58,37 +61,22 @@ function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero-text">
-        <div className="hero-socials">
-          <a
-            className="social-pill s1"
-            href="https://www.linkedin.com/in/chethana-kumari-c-847002362?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-            aria-label="LinkedIn"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <i className="fa-brands fa-linkedin"></i>
-          </a>
-          <a
-            className="social-pill s2"
-            href="https://github.com/chethanakumari07"
-            aria-label="GitHub"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <i className="fa-brands fa-github"></i>
-          </a>
-        </div>
         <p className="greeting">Hello,</p>
         <h1>
-          I'm 
-          <h1 className="highlight">Chethana kumari C</h1>
-          <h6>Software Developer</h6>
+          I'm <span className="highlight">Chethana</span>
+          <br />
+          Software Developer
         </h1>
+        <p>
+          I'm a final-year Information Science & Engineering student who
+          builds full-stack web applications end to end — from clean,
+          responsive interfaces to the backend logic that powers them.
+        </p>
         <button className="hire-btn" onClick={() => scrollTo("contact")}>
-        <span>�</span> Hire me
-      </button>   
+          <span>💼</span> Hire me
+        </button>
       </div>
-          
+
       <div className="hero-image-wrapper">
         <img
           src={profileAvatar}
@@ -107,6 +95,11 @@ function Hero() {
 }
 
 function About() {
+  // const skills = [
+  //   "Java", "Python", "C", "PHP", "React", "Node.js",
+  //   "Flask", "MySQL", "HTML/CSS/JS", "DSA"
+  // ];
+
   return (
     <section className="about" id="about">
       <h2 className="section-title">About <span className="highlight">Me</span></h2>
@@ -219,10 +212,11 @@ function Contact() {
       return;
     }
 
+    const serviceId = "service_t3e2caj"; 
+    const templateId = "wqUC-fdW398zz7GD6"; 
+    const public_key = "wqUC-fdW398zz7GD6";
     try {
-      await emailjs.send(
-        serviceId,
-        templateId,
+      await emailjs.send(serviceId, templateId, 
         {
           first_name: form.first_name,
           last_name: form.last_name,
@@ -321,7 +315,7 @@ function App() {
 
   return (
     <div>
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navbar />
       <Hero />
       <About />
       <Skills />
