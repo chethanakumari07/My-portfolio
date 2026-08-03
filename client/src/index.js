@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import { createRoot } from "react-dom/client";
 import emailjs from "@emailjs/browser";
 import profileAvatar from "./profile_avatar-removebg-preview.png";
@@ -9,8 +9,6 @@ const serviceId = "service_t3e2caj";
 const templateId = "template_bof8h2h";
 const publicKey = "wqUC-fdW398zz7GD6";
 
-// Replace the placeholder values above with the real EmailJS credentials
-// from your EmailJS dashboard for the contact form to work.
 
 function scrollTo(id) {
   const el = document.getElementById(id);
@@ -22,7 +20,6 @@ function Navbar({ theme, toggleTheme}) {
 
   const closeMenu = () => setMenuOpen(false);
 
-function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo">
@@ -50,6 +47,7 @@ function Navbar() {
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen((open) => !open)}>
         <i className="fa-solid fa-bars"></i>
+        </button>
       <button className="contact-btn" onClick={() => scrollTo("contact")}>
         <span>💬</span> Contact me
       </button>
@@ -69,8 +67,7 @@ function Hero() {
         </h1>
         <p>
           I'm a final-year Information Science & Engineering student who
-          builds full-stack web applications end to end — from clean,
-          responsive interfaces to the backend logic that powers them.
+          builds full-stack web applications
         </p>
         <button className="hire-btn" onClick={() => scrollTo("contact")}>
           <span>💼</span> Hire me
@@ -95,10 +92,6 @@ function Hero() {
 }
 
 function About() {
-  // const skills = [
-  //   "Java", "Python", "C", "PHP", "React", "Node.js",
-  //   "Flask", "MySQL", "HTML/CSS/JS", "DSA"
-  // ];
 
   return (
     <section className="about" id="about">
@@ -212,10 +205,7 @@ function Contact() {
       return;
     }
 
-    const serviceId = "service_t3e2caj"; 
-    const templateId = "wqUC-fdW398zz7GD6"; 
-    const public_key = "wqUC-fdW398zz7GD6";
-    try {
+        try {
       await emailjs.send(serviceId, templateId, 
         {
           first_name: form.first_name,
@@ -315,7 +305,7 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
       <Hero />
       <About />
       <Skills />
