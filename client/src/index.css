@@ -210,8 +210,8 @@ body {
 
 /* Shared section styles */
 section {
-  padding: 80px;
-  scroll-margin-top: 40px;
+  padding: 60px max(24px, 5vw);
+  scroll-margin-top: 20px;
 }
 .mobile-toggle {
   display: none;
@@ -235,9 +235,9 @@ section {
 
 /* About */
 .about-content {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0px auto;
-  text-align: both center;
+  text-align: center;
 }
 .about-content h3 {
   font-size: 22px;
@@ -276,7 +276,7 @@ section {
 }
 .stat-box{
   background:var(--card);border:1px solid var(--card-border);border-radius:16px;
-  padding:22px 26px;text-align:center;min-width:120px;
+  padding:20px 80px;text-align:center;min-width:120px;
 }
 .stat-num
 {
@@ -302,9 +302,9 @@ section {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 22px;
-  max-width: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap:20px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -312,7 +312,7 @@ section {
   background: var(--card);
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  padding: 24px;
+  padding:30px 60px;
   text-align: center;
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
