@@ -47,10 +47,6 @@ function Navbar({ theme, toggleTheme}) {
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen((open) => !open)}>
         <i className="fa-solid fa-bars"></i>
-        </button>
-      <button className="contact-btn" onClick={() => scrollTo("contact")}>
-        <span>💬</span> Contact me
-      </button>
     </nav>
   );
 }
